@@ -1,0 +1,29 @@
+{
+  "name": "@axuata/logify",
+  "version": "0.1.0",
+  "description": "⚡ A TypeScript logging utility library",
+  "homepage": "https://github.com/axuata/logify#readme",
+  "bugs": {
+    "url": "https://github.com/axuata/logify/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axuata/logify.git"
+  },
+  "license": "MIT",
+  "author": "Axuata",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "vitest --run"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.5"
+  },
+  "dependencies": {
+    "typescript": "^5.7.3"
+  }
+}
