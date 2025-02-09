@@ -49,8 +49,33 @@ export class Logger {
 
   insertTimestamp(): this {
     const date = new Date();
-    const timestamp = `[${date.toLocaleString()} (UTC+${-(date.getTimezoneOffset() / 60)})] `
-    this.message = timestamp + this.message;
+    const timestamp = `[${date.toLocaleString()} (UTC+${-(date.getTimezoneOffset() / 60)})]`
+    this.message = timestamp + ' ' + this.message;
+
+    return this;
+  }
+
+  insertCustomTimestamp(format: string): this {
+    const date = new Date();
+    let result: string = '';
+
+    result = format
+      .replace(/YYYY/g, date.getFullYear().toString())
+      .replace(/MM/g, date.getMonth().toString())
+      .replace(/DD/g, date.getDate().toString())
+      .replace(/HH/g, date.getHours().toString())
+      .replace(/mm/g, date.getMinutes().toString())
+      .replace(/ss/g, date.getSeconds().toString())
+      .replace(/sss/g, date.getMilliseconds().toString())
+      .replace(/Z/g, `(UTC+${-(date.getTimezoneOffset() / 60)})`)
+
+    this.message = '[' + result + '] ' + this.message;
+
+    return this;
+  }
+
+  insertCustomPrefix(prefix: string): this {
+    this.message = prefix + ' ' + this.message;
 
     return this;
   }

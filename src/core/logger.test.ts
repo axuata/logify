@@ -6,14 +6,14 @@ import {describe, expect, it, vi} from "vitest";
 import {Logger, LogLevel, OutType} from "./logger";
 
 describe("Logger", () => {
-  it("should output a message", () => {
+  it("should output a message without timestamp", () => {
     const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 
     const logger = new Logger();
     const message = 'Hello, World 1';
-    logger.log(LogLevel.WARN, message).out(OutType.LOG);
+    logger.log(LogLevel.LOG, message).out(OutType.LOG);
 
-    expect(consoleSpy).toHaveBeenCalledWith(`[WARN] ${message}`);
+    expect(consoleSpy).toHaveBeenCalledWith(`[LOG] ${message}`);
 
     consoleSpy.mockRestore();
   });
@@ -23,30 +23,37 @@ describe("Logger", () => {
 
     const logger = new Logger();
     const message = 'Hello, World 2';
-    const timestampPattern = /\[\d{4}\/\d{1,2}\/\d{1,2} \d{2}:\d{2}:\d{2} \(UTC[+-]\d{1,2}\)]/;
-    logger.log(LogLevel.INFO, message).insertTimestamp().out(OutType.LOG);
+    const timestampPattern = /\[\d{4}\/\d{1,2}\/\d{1,2} \d{1,2}:\d{2}:\d{2} \(UTC[+-]?\d{1,2}\)]/;
+    logger.log(LogLevel.LOG, message).insertTimestamp().out(OutType.LOG);
 
-    expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(timestampPattern)); // タイムスタンプがパターンと一致するか
-    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`[INFO] ${message}`)); // メッセージが含まれているか
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(timestampPattern));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`[LOG] ${message}`));
 
     consoleSpy.mockRestore();
   });
 
-  it("test", () => {
-// instantiation
-    const logger = new Logger(); // Using 'let' is also OK
+  it("should output a message with a custom timestamp", () => {
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 
-// Logging without timestamp
-    logger.log(LogLevel.LOG, 'Hello World without timestamp').out(OutType.LOG);
+    const logger = new Logger();
+    const message = 'Hello, World 3';
+    logger.log(LogLevel.LOG, message).insertCustomTimestamp('YYYY/MM/DD HH:mm:ss Z').out(OutType.LOG);
 
-// Logging with tampstamp
-    logger.log(LogLevel.LOG, 'Hello World with timestamp').insertTimestamp().out(OutType.LOG);
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`2025`));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`(UTC`));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`[LOG]`));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`${message}`));
 
-// You can use different levels!
-    logger.log(LogLevel.LOG, 'Hello World').out(OutType.LOG)
-    logger.log(LogLevel.DEBUG, 'Hello World').out(OutType.DEBUG)
-    logger.log(LogLevel.INFO, 'Hello World').out(OutType.INFO)
-    logger.log(LogLevel.WARN, 'Hello World').out(OutType.WARN)
-    logger.log(LogLevel.ERROR, 'Hello World').out(OutType.ERROR)
+    consoleSpy.mockRestore();
+  })
+
+  it("should output a message with a custom prefix", () => {
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+
+    const logger = new Logger();
+    const message = 'Hello, World 4';
+    logger.log(LogLevel.LOG, message).insertCustomPrefix('⚡').out(OutType.LOG);
+
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`⚡ [LOG] ${message}`));
   });
 });
