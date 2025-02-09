@@ -1,9 +1,7 @@
 <details>
-  <summary>0.2.0 Changelog</summary>
+  <summary>0.3.0 Changelog</summary>
 
-  - Add ``insertCustomTimestamp(format: string): this``
-  - Add ``insertPrefix(prefix: string): this``
-  - Improve README.md
+  - Add InsertPosition for each ***Insert*** methods
 </details>
 
 # What is Logify?
@@ -36,10 +34,10 @@ const logger = new Logger(); // Using 'let' is also OK
 logger.log(LogLevel.LOG, 'Hello World without timestamp').out(OutType.LOG);
 
 // Logging with timestamp (Using insertTimestamp())
-logger.log(LogLevel.LOG, 'Hello World with timestamp').insertTimestamp().out(OutType.LOG);
+logger.log(LogLevel.LOG, 'Hello World with timestamp').insertTimestamp(InsertPosition.BEFORE).out(OutType.LOG);
 
 // Logging with a custom timestamp (Using insertCustomTimestamp)
-logger.log(LogLevel.LOG, 'Hello World with a custom timestamp').insertCustomTimestamp('YYYY/MM/DD HH:mm:ss Z').out(OutType.LOG);
+logger.log(LogLevel.LOG, 'Hello World with a custom timestamp').insertCustomTimestamp('YYYY/MM/DD HH:mm:ss Z', InsertPosition.BEFORE).out(OutType.LOG);
 
 // You can use different levels!
 logger.log(LogLevel.LOG, 'Hello World').out(OutType.LOG);
@@ -88,18 +86,18 @@ This package is licensed under the MIT License.
   - ```typescript
     logger.log(LogLevel.LOG, "Hello World").out(OutType.LOG);
     ```
-- ``.insertTimestamp(): this``
+- ``.insertTimestamp(position: InsertPosition): this``
   - Inserts the current timestamp at the beginning of the log message.
   - ```typescript
-    logger.log(LogLevel.LOG, "Hello World").insertTimestamp().out(OutType.LOG);
+    logger.log(LogLevel.LOG, "Hello World").insertTimestamp(InsertPosition.BEFORE).out(OutType.LOG);
     ```
-- ``.insertCustomTimestamp(format: string): this``
+- ``.insertCustomTimestamp(format: string, position: InsertPosition): this``
   - Inserts a custom timestamp at the beginning of the log message.
   - ```typescript
-    logger.log(LogLevel.LOG, message).insertCustomTimestamp('YYYY/MM/DD HH:mm:ss Z').out(OutType.LOG);
+    logger.log(LogLevel.LOG, message).insertCustomTimestamp('YYYY/MM/DD HH:mm:ss Z', InsertPosition.BEFORE).out(OutType.LOG);
     ```
-- ``.insertCustomPrefix(prefix: string): this``
+- ``.insertCustomPrefix(prefix: string, position: InsertPosition): this``
   - Inserts a custom prefix at the beginning of the log message.
   - ```typescript
-    logger.log(LogLevel.LOG, message).insertCustomPrefix('⚡').out(OutType.LOG);
+    logger.log(LogLevel.LOG, message).insertCustomPrefix('⚡', InsertPosition.BEFORE).out(OutType.LOG);
     ```

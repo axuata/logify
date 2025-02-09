@@ -18,6 +18,10 @@ export enum OutType {
   ERROR,
 }
 
+export enum InsertPosition {
+  BEFORE,
+  AFTER,
+}
 
 export class Logger {
   private message: string = '';
@@ -47,15 +51,20 @@ export class Logger {
     return this;
   }
 
-  insertTimestamp(): this {
+  insertTimestamp(position: InsertPosition): this {
     const date = new Date();
     const timestamp = `[${date.toLocaleString()} (UTC+${-(date.getTimezoneOffset() / 60)})]`
-    this.message = timestamp + ' ' + this.message;
+
+    if (position === InsertPosition.BEFORE) {
+      this.message = timestamp + ' ' + this.message;
+    } else {
+      this.message = this.message + ' ' + timestamp;
+    }
 
     return this;
   }
 
-  insertCustomTimestamp(format: string): this {
+  insertCustomTimestamp(format: string, position: InsertPosition): this {
     const date = new Date();
     let result: string = '';
 
@@ -69,13 +78,21 @@ export class Logger {
       .replace(/sss/g, date.getMilliseconds().toString())
       .replace(/Z/g, `(UTC+${-(date.getTimezoneOffset() / 60)})`)
 
-    this.message = '[' + result + '] ' + this.message;
+    if (position === InsertPosition.BEFORE) {
+      this.message = '[' + result + '] ' + this.message;
+    } else {
+      this.message = this.message + ' [' + result + ']';
+    }
 
     return this;
   }
 
-  insertCustomPrefix(prefix: string): this {
-    this.message = prefix + ' ' + this.message;
+  insertCustomPrefix(prefix: string, position: InsertPosition): this {
+    if (position === InsertPosition.BEFORE) {
+      this.message = prefix + ' ' + this.message;
+    } else {
+      this.message = this.message + ' ' + prefix;
+    }
 
     return this;
   }
