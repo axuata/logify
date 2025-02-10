@@ -1,7 +1,7 @@
 <details>
-  <summary>0.3.0 Changelog</summary>
+  <summary>0.3.1 Changelog</summary>
 
-  - Add InsertPosition for each ***Insert*** methods
+  - Remove test files
 </details>
 
 # What is Logify?
