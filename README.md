@@ -1,7 +1,8 @@
 <details>
-  <summary>0.3.2 Changelog</summary>
+  <summary>0.3.3 Changelog</summary>
 
   - Updated README.md
+  - Refactored conditional logic to use ternary operators
 </details>
 
 # What is Logify?
@@ -63,7 +64,7 @@ logger.log(LogLevel.ERROR, 'Hello World').out(OutType.ERROR);
 - Methods with ``insert`` in their name have higher priority the further they are towards the end.
   - for Example:
   - ```typescript
-    logger.log(LogLevel.LOG, 'Hello World').insertCustomTimestamp('HH:mm:ss').insertTimestamp(InsertPosition.BEFORE).out(OutType.LOG);
+    logger.log(LogLevel.LOG, 'Hello World').insertCustomTimestamp('HH:mm:ss', InsertPosition.BEFORE).insertTimestamp(InsertPosition.BEFORE).out(OutType.LOG);
     ```
   - will be:
   - ```log

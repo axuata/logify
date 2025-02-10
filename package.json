@@ -1,6 +1,6 @@
 {
   "name": "@axuata/logify",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "⚡ A TypeScript logging utility library",
   "homepage": "https://github.com/axuata/logify#readme",
   "bugs": {

@@ -55,11 +55,9 @@ export class Logger {
     const date = new Date();
     const timestamp = `[${date.toLocaleString()} (UTC+${-(date.getTimezoneOffset() / 60)})]`
 
-    if (position === InsertPosition.BEFORE) {
-      this.message = timestamp + ' ' + this.message;
-    } else {
-      this.message = this.message + ' ' + timestamp;
-    }
+    this.message = (position === InsertPosition.BEFORE)
+      ? timestamp + ' ' + this.message
+      : this.message + ' ' + timestamp;
 
     return this;
   }
@@ -78,21 +76,17 @@ export class Logger {
       .replace(/sss/g, date.getMilliseconds().toString())
       .replace(/Z/g, `(UTC+${-(date.getTimezoneOffset() / 60)})`)
 
-    if (position === InsertPosition.BEFORE) {
-      this.message = '[' + result + '] ' + this.message;
-    } else {
-      this.message = this.message + ' [' + result + ']';
-    }
+    this.message = (position === InsertPosition.BEFORE)
+      ? '[' + result + '] ' + this.message
+      : this.message + ' [' + result + ']';
 
     return this;
   }
 
   insertCustomPrefix(prefix: string, position: InsertPosition): this {
-    if (position === InsertPosition.BEFORE) {
-      this.message = prefix + ' ' + this.message;
-    } else {
-      this.message = this.message + ' ' + prefix;
-    }
+    this.message = (position === InsertPosition.BEFORE)
+      ? prefix + ' ' + this.message
+      : this.message + ' ' + prefix;
 
     return this;
   }
