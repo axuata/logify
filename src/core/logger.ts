@@ -91,6 +91,16 @@ export class Logger {
     return this;
   }
 
+  startGroup(label: string): this {
+    console.group(label);
+    return this;
+  }
+
+  endGroup(): this {
+    console.groupEnd();
+    return this;
+  }
+
   out(outType: OutType): void {
     switch (outType) {
       case OutType.LOG:

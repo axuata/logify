@@ -1,8 +1,8 @@
 <details>
-  <summary>0.3.3 Changelog</summary>
+  <summary>0.4.0 Changelog</summary>
 
-  - Updated README.md
-  - Refactored conditional logic to use ternary operators
+  - Add startGroup(label: string)
+  - Add endGroup()
 </details>
 
 # What is Logify?
@@ -101,4 +101,14 @@ This package is licensed under the MIT License.
   - Inserts a custom prefix at the beginning of the log message.
   - ```typescript
     logger.log(LogLevel.LOG, message).insertCustomPrefix('⚡', InsertPosition.BEFORE).out(OutType.LOG);
+    ```
+- ``.startGroup(label: string): this``
+  - Starts a group.
+  - ```typescript
+    logger.log(LogLevel.LOG, message).startGroup('hello').out(OutType.LOG);
+    ```
+- ``.endGroup(): this``
+  - Ends a group.
+  - ```typescript
+    logger.log(LogLevel.LOG, message).endGroup().out(OutType.LOG);
     ```

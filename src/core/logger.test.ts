@@ -94,4 +94,27 @@ describe("Logger", () => {
 
     expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`[LOG] ${message} ⚡`));
   });
+
+  it("should start a log group with the given label", () => {
+    const consoleGroupSpy = vi.spyOn(console, "group").mockImplementation(() => {});
+
+    const logger = new Logger();
+    const groupLabel = "Hello, World 8";
+    logger.startGroup(groupLabel);
+
+    expect(consoleGroupSpy).toHaveBeenCalledWith(groupLabel);
+
+    consoleGroupSpy.mockRestore();
+  });
+
+  it("should end a log group", () => {
+    const consoleGroupEndSpy = vi.spyOn(console, "groupEnd").mockImplementation(() => {});
+
+    const logger = new Logger();
+    logger.endGroup();
+
+    expect(consoleGroupEndSpy).toHaveBeenCalled();
+
+    consoleGroupEndSpy.mockRestore();
+  });
 });
