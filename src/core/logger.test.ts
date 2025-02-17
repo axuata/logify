@@ -37,7 +37,7 @@ describe("Logger", () => {
 
     const logger = new Logger();
     const message = 'Hello, World 3';
-    logger.log(LogLevel.LOG, message).insertCustomTimestamp('YYYY/MM/DD HH:mm:ss Z', InsertPosition.BEFORE).out(OutType.LOG);
+    logger.log(LogLevel.LOG, message).insertCustomTimestamp('[Y]-[MM]-[DD] [hh]:[mm]:[ss] (UTC[timezoneOffsetHours])', InsertPosition.BEFORE).out(OutType.LOG);
 
     expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`2025`));
     expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`(UTC`));
@@ -45,6 +45,8 @@ describe("Logger", () => {
     expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`${message}`));
 
     consoleSpy.mockRestore();
+
+    logger.log(LogLevel.LOG, message).insertCustomTimestamp('[Y]-[MM]-[DD] [hh]:[mm]:[ss] (UTC[timezoneOffsetHours])', InsertPosition.BEFORE).out(OutType.LOG);
   })
 
   it("should output a message with a custom prefix placed before the main message", () => {
@@ -76,7 +78,7 @@ describe("Logger", () => {
 
     const logger = new Logger();
     const message = 'Hello, World 6';
-    logger.log(LogLevel.LOG, message).insertCustomTimestamp('YYYY/MM/DD HH:mm:ss Z', InsertPosition.AFTER).out(OutType.LOG);
+    logger.log(LogLevel.LOG, message).insertCustomTimestamp('[Y]-[MM]-[DD] [hh]:[mm]:[ss] (UTC[timezoneOffsetHours])', InsertPosition.AFTER).out(OutType.LOG);
 
     expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`${message} [2025`));
     expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining(`(UTC`));
