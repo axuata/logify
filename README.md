@@ -1,8 +1,7 @@
 <details>
-  <summary>0.4.0 Changelog</summary>
+  <summary>0.4.1 Changelog</summary>
 
-  - Add startGroup(label: string)
-  - Add endGroup()
+  - Fix README.md
 </details>
 
 # What is Logify?
@@ -26,7 +25,7 @@ yarn add @axuata/logify
 # Example
 ```typescript
 // import
-import {Logger, LogLevel, OutType} from "./logger";
+import {Logger, LogLevel, OutType} from "@axuata/logify";
 
 // instantiation
 const logger = new Logger(); // Using 'let' is also OK
