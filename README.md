@@ -1,9 +1,5 @@
-<details>
-  <summary>1.0.1 Changelog</summary>
-
-  - Renewed README.md (I was thinking of compiling it into Axulibs, but since it's a small-scale library, I believe it's best to write it here.)
-  - Added LICENSE
-</details>
+## WARNING
+**This package is deprecated.** Use [Logica](https://www.npmjs.com/package/@axuata/logica)
 
 # What is Logify?
 **Logify** is a lightweight **TypeScript logger library** developed by **Axuata**.
